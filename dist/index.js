@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OSSClient = void 0;
+exports.getFileName = exports.getFileExtension = exports.OSSClient = void 0;
 const ali_oss_1 = __importDefault(require("ali-oss"));
 const axios_1 = __importDefault(require("axios"));
 class OSSClient {
@@ -39,4 +39,17 @@ class OSSClient {
     }
 }
 exports.OSSClient = OSSClient;
+function getFileExtension(filePath, includeDot = false) {
+    let extension = filePath.split(".").pop();
+    if (includeDot) {
+        extension = "." + extension;
+    }
+    return extension;
+}
+exports.getFileExtension = getFileExtension;
+function getFileName(filePath) {
+    let fileName = filePath.split("/").pop();
+    return fileName;
+}
+exports.getFileName = getFileName;
 //# sourceMappingURL=index.js.map

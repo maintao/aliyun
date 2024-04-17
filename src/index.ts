@@ -44,3 +44,16 @@ export class OSSClient {
     return results;
   }
 }
+
+export function getFileExtension(filePath: string, includeDot = false) {
+  let extension = filePath.split(".").pop();
+  if (includeDot) {
+    extension = "." + extension;
+  }
+  return extension;
+}
+
+export function getFileName(filePath: string) {
+  let fileName = filePath.split("/").pop();
+  return fileName;
+}
