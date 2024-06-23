@@ -9,6 +9,8 @@ const axios_1 = __importDefault(require("axios"));
 class OSSClient {
     constructor(config) {
         this.client = new ali_oss_1.default(config);
+        this.region = config.region;
+        this.bucket = config.bucket;
     }
     async uploadFromUrl(url, name) {
         let response;

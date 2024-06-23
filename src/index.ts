@@ -10,9 +10,13 @@ export interface OSSConfig {
 
 export class OSSClient {
   private client: OSS;
+  public readonly region: string;
+  public readonly bucket: string;
 
   constructor(config: OSSConfig) {
     this.client = new OSS(config);
+    this.region = config.region;
+    this.bucket = config.bucket;
   }
 
   async uploadFromUrl(url: string, name: string) {

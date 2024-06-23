@@ -7,6 +7,8 @@ export interface OSSConfig {
 }
 export declare class OSSClient {
     private client;
+    readonly region: string;
+    readonly bucket: string;
     constructor(config: OSSConfig);
     uploadFromUrl(url: string, name: string): Promise<{
         name: string;
