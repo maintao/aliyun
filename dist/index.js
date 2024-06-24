@@ -46,7 +46,7 @@ function getFileExtension(filePath, includeDot = false) {
     if (includeDot) {
         extension = "." + extension;
     }
-    return extension;
+    return extension || "";
 }
 exports.getFileExtension = getFileExtension;
 function getFileName(filePath) {

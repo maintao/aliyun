@@ -49,12 +49,12 @@ export class OSSClient {
   }
 }
 
-export function getFileExtension(filePath: string, includeDot = false) {
+export function getFileExtension(filePath: string, includeDot = false): string {
   let extension = filePath.split(".").pop();
   if (includeDot) {
     extension = "." + extension;
   }
-  return extension;
+  return extension || "";
 }
 
 export function getFileName(filePath: string) {
