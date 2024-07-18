@@ -50,11 +50,23 @@ export class OSSClient {
 }
 
 export function getFileExtension(filePath: string, includeDot = false): string {
-  let extension = filePath.split(".").pop();
+  let fileName = filePath.split("/").pop() || "";
+
+  const regex = /\.(\w+)$/;
+  const match = fileName.match(regex);
+  if (!match) {
+    return "";
+  }
+
+  let extension = match[1];
+  if (!extension) {
+    return "";
+  }
+
   if (includeDot) {
     extension = "." + extension;
   }
-  return extension || "";
+  return extension;
 }
 
 export function getFileName(filePath: string) {

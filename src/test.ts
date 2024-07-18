@@ -1,4 +1,5 @@
-import { OSSClient } from "./index";
+import { get } from "http";
+import { getFileExtension, OSSClient } from "./index";
 require("dotenv").config();
 
 // Usage

@@ -42,11 +42,20 @@ class OSSClient {
 }
 exports.OSSClient = OSSClient;
 function getFileExtension(filePath, includeDot = false) {
-    let extension = filePath.split(".").pop();
+    let fileName = filePath.split("/").pop() || "";
+    const regex = /\.(\w+)$/;
+    const match = fileName.match(regex);
+    if (!match) {
+        return "";
+    }
+    let extension = match[1];
+    if (!extension) {
+        return "";
+    }
     if (includeDot) {
         extension = "." + extension;
     }
-    return extension || "";
+    return extension;
 }
 exports.getFileExtension = getFileExtension;
 function getFileName(filePath) {
