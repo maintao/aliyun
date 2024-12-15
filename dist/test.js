@@ -46,4 +46,8 @@ client
     .catch((err) => {
     console.error(err);
 });
+console.log((0, index_1.imageUrlResize)({
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    width: 125,
+}));
 //# sourceMappingURL=test.js.map

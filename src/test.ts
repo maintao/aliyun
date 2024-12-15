@@ -1,5 +1,5 @@
 import { get } from "http";
-import { getFileExtension, OSSClient } from "./index";
+import { getFileExtension, imageUrlResize, OSSClient } from "./index";
 require("dotenv").config();
 
 // Usage
@@ -48,3 +48,10 @@ client
   .catch((err) => {
     console.error(err);
   });
+
+console.log(
+  imageUrlResize({
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    width: 125,
+  })
+);

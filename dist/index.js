@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFileName = exports.getFileExtension = exports.OSSClient = void 0;
+exports.imageUrlResize = exports.getFileName = exports.getFileExtension = exports.OSSClient = void 0;
 const ali_oss_1 = __importDefault(require("ali-oss"));
 const axios_1 = __importDefault(require("axios"));
 class OSSClient {
@@ -63,4 +63,16 @@ function getFileName(filePath) {
     return fileName;
 }
 exports.getFileName = getFileName;
+function imageUrlResize({ url, width }) {
+    // Check if URL is empty or invalid
+    if (!url)
+        return url;
+    // Check if URL already has query parameters
+    const hasQueryParams = url.includes("?");
+    // Add the OSS resize parameter
+    const resizeParam = `x-oss-process=image/resize,w_${width}`;
+    // Combine URL with resize parameter
+    return `${url}${hasQueryParams ? "&" : "?"}${resizeParam}`;
+}
+exports.imageUrlResize = imageUrlResize;
 //# sourceMappingURL=index.js.map

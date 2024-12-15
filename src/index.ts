@@ -73,3 +73,17 @@ export function getFileName(filePath: string) {
   let fileName = filePath.split("/").pop();
   return fileName;
 }
+
+export function imageUrlResize({ url, width }: { url: string; width: number }): string {
+  // Check if URL is empty or invalid
+  if (!url) return url;
+
+  // Check if URL already has query parameters
+  const hasQueryParams = url.includes("?");
+
+  // Add the OSS resize parameter
+  const resizeParam = `x-oss-process=image/resize,w_${width}`;
+
+  // Combine URL with resize parameter
+  return `${url}${hasQueryParams ? "&" : "?"}${resizeParam}`;
+}

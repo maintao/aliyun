@@ -24,4 +24,8 @@ export declare class OSSClient {
 }
 export declare function getFileExtension(filePath: string, includeDot?: boolean): string;
 export declare function getFileName(filePath: string): string | undefined;
+export declare function imageUrlResize({ url, width }: {
+    url: string;
+    width: number;
+}): string;
 //# sourceMappingURL=index.d.ts.map
