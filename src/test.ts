@@ -1,5 +1,12 @@
 import { get } from "http";
-import { getFileExtension, imageUrlResize, OSSClient } from "./index";
+import {
+  getFileExtension,
+  getImageInfo,
+  getImageInfoBatch,
+  imageUrlInfo,
+  imageUrlResize,
+  OSSClient,
+} from "./index";
 require("dotenv").config();
 
 // Usage
@@ -14,44 +21,48 @@ const client = new OSSClient(config);
 console.log("region:", client.region);
 console.log("bucket:", client.bucket);
 
-const downloads = [
-  {
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    name: `/temp/1.png`,
-  },
-  {
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    name: `/temp/2.png`,
-  },
-  {
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    name: `/temp/3.png`,
-  },
-  {
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    name: `/temp/4.png`,
-  },
-  {
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    name: `/temp/5.png`,
-  },
-  {
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    name: `/temp/6.png`,
-  },
-];
-client
-  .batchUploadFromUrl(downloads, 5)
-  .then((results) => {
-    console.log("done");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+// const downloads = [
+//   {
+//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+//     name: `/temp/1.png`,
+//   },
+//   {
+//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+//     name: `/temp/2.png`,
+//   },
+//   {
+//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+//     name: `/temp/3.png`,
+//   },
+//   {
+//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+//     name: `/temp/4.png`,
+//   },
+//   {
+//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+//     name: `/temp/5.png`,
+//   },
+//   {
+//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+//     name: `/temp/6.png`,
+//   },
+// ];
+// client
+//   .batchUploadFromUrl(downloads, 5)
+//   .then((results) => {
+//     console.log("done");
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
 
-console.log(
-  imageUrlResize({
-    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-    width: 125,
-  })
-);
+(async function test() {
+  console.log(
+    imageUrlResize({
+      url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+      width: 125,
+    })
+  );
+
+  console.log(await getImageInfo("https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png"));
+})();
