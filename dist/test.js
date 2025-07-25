@@ -46,29 +46,20 @@ console.log("bucket:", client.bucket);
 //   .catch((err) => {
 //     console.error(err);
 //   });
-(async function test() {
+(async function testOSS() {
     console.log((0, index_1.imageUrlResize)({
         url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
         width: 125,
     }));
     console.log(await (0, index_1.getImageInfo)("https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png"));
-    const urls = [
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-01.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-02.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-03.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-04.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-05.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-06.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-07.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-08.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-09.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-10.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-11.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-12.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-13.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-14.jpg",
-        "https://cdn.fnmain.com/mp-insurance/calendar/2024/2024-01-15.jpg",
-    ];
-    console.log(await (0, index_1.getImageInfoBatch)(urls));
+})();
+// 测试 ECS 重启
+(async function testECS() {
+    const ecsClient = new index_1.ECSClient({
+        endpoint: process.env.ECS_ENDPOINT,
+        accessKeyId: process.env.ACCESS_KEY_ID,
+        accessKeySecret: process.env.ACCESS_KEY_SECRET,
+    });
+    await ecsClient.reboot(process.env.ECS_INSTANCE_ID);
 })();
 //# sourceMappingURL=test.js.map

@@ -1,5 +1,6 @@
 import { get } from "http";
 import {
+  ECSClient,
   getFileExtension,
   getImageInfo,
   getImageInfoBatch,
@@ -56,7 +57,7 @@ console.log("bucket:", client.bucket);
 //     console.error(err);
 //   });
 
-(async function test() {
+(async function testOSS() {
   console.log(
     imageUrlResize({
       url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
@@ -65,4 +66,14 @@ console.log("bucket:", client.bucket);
   );
 
   console.log(await getImageInfo("https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png"));
+})();
+
+// 测试 ECS 重启
+(async function testECS() {
+  const ecsClient = new ECSClient({
+    endpoint: process.env.ECS_ENDPOINT as string,
+    accessKeyId: process.env.ACCESS_KEY_ID as string,
+    accessKeySecret: process.env.ACCESS_KEY_SECRET as string,
+  });
+  await ecsClient.reboot(process.env.ECS_INSTANCE_ID as string);
 })();
