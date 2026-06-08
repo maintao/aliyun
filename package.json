@@ -1,12 +1,13 @@
 {
   "name": "@fnmain/aliyun",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "aliyun utils",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "tsc && node dist/test.js",
+    "login": "npm login --registry=https://registry.npmjs.org/",
     "pub": "npm run build && npm publish --access public --registry=https://registry.npmjs.org/ && node sync-npmmirror.js "
   },
   "author": "DC",
@@ -23,7 +24,9 @@
   },
   "dependencies": {
     "@alicloud/ecs20140526": "7.0.17",
+    "@alicloud/imageseg20191230": "^4.0.1",
     "@alicloud/openapi-client": "^0.4.15",
+    "@alicloud/openapi-core": "^1.0.7",
     "ali-oss": "^6.20.0",
     "axios": "^1.6.8"
   }

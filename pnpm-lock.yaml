@@ -8,9 +8,15 @@ dependencies:
   '@alicloud/ecs20140526':
     specifier: 7.0.17
     version: 7.0.17
+  '@alicloud/imageseg20191230':
+    specifier: ^4.0.1
+    version: 4.0.1
   '@alicloud/openapi-client':
     specifier: ^0.4.15
     version: 0.4.15
+  '@alicloud/openapi-core':
+    specifier: ^1.0.7
+    version: 1.0.7
   ali-oss:
     specifier: ^6.20.0
     version: 6.20.0
@@ -95,7 +101,7 @@ packages:
   /@alicloud/ecs20140526@7.0.17:
     resolution: {integrity: sha512-N51kTuXPoDLuIXOyQeHYXH4d4za297Y7QzD8cSJ81Etu5ExXFc5Sa6KZ8xUW/kco6UhqBS2Ccz2jJlD2rxnKJw==}
     dependencies:
-      '@alicloud/openapi-core': 1.0.4
+      '@alicloud/openapi-core': 1.0.7
       '@darabonba/typescript': 1.0.3
     transitivePeerDependencies:
       - supports-color
@@ -137,6 +143,16 @@ packages:
       - supports-color
     dev: false
 
+  /@alicloud/imageseg20191230@4.0.1:
+    resolution: {integrity: sha512-9LYynhBauIjFiE6ENRnWVZGl3xz3zbQraE+f3gpIiYqceJrBAQxqJRoF/CSuSmnVJyrelbQdjs7XZoZkofmFwg==}
+    dependencies:
+      '@alicloud/credentials': 2.4.4
+      '@alicloud/openapi-core': 1.0.7
+      '@darabonba/typescript': 1.0.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@alicloud/openapi-client@0.4.15:
     resolution: {integrity: sha512-4VE0/k5ZdQbAhOSTqniVhuX1k5DUeUMZv74degn3wIWjLY6Bq+hxjaGsaHYlLZ2gA5wUrs8NcI5TE+lIQS3iiA==}
     dependencies:
@@ -150,8 +166,8 @@ packages:
       - supports-color
     dev: false
 
-  /@alicloud/openapi-core@1.0.4:
-    resolution: {integrity: sha512-e9WK1lKiMOOziuLgNaYWv7FL50FyrcpO+idoLhNmFR7k0Fax4lPht5suBpTBr1PSINg5R1W3eOCm5vaUTrY4lg==}
+  /@alicloud/openapi-core@1.0.7:
+    resolution: {integrity: sha512-I80PQVfmlzRiXGHwutMp2zTpiqUVv8ts30nWAfksfHUSTIapk3nj9IXaPbULMPGNV6xqEyshO2bj2a+pmwc2tQ==}
     requiresBuild: true
     dependencies:
       '@alicloud/credentials': 2.4.4

@@ -7,6 +7,7 @@ import {
   imageUrlInfo,
   imageUrlResize,
   OSSClient,
+  VIClient,
 } from "./index";
 require("dotenv").config();
 
@@ -22,47 +23,47 @@ const client = new OSSClient(config);
 console.log("region:", client.region);
 console.log("bucket:", client.bucket);
 
-// const downloads = [
-//   {
-//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-//     name: `/temp/1.png`,
-//   },
-//   {
-//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-//     name: `/temp/2.png`,
-//   },
-//   {
-//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-//     name: `/temp/3.png`,
-//   },
-//   {
-//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-//     name: `/temp/4.png`,
-//   },
-//   {
-//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-//     name: `/temp/5.png`,
-//   },
-//   {
-//     url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
-//     name: `/temp/6.png`,
-//   },
-// ];
-// client
-//   .batchUploadFromUrl(downloads, 5)
-//   .then((results) => {
-//     console.log("done");
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
+const downloads = [
+  {
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    name: `/temp/1.png`,
+  },
+  {
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    name: `/temp/2.png`,
+  },
+  {
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    name: `/temp/3.png`,
+  },
+  {
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    name: `/temp/4.png`,
+  },
+  {
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    name: `/temp/5.png`,
+  },
+  {
+    url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    name: `/temp/6.png`,
+  },
+];
+client
+  .batchUploadFromUrl(downloads, 5)
+  .then((results) => {
+    console.log("done");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 (async function testOSS() {
   console.log(
     imageUrlResize({
       url: "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
       width: 125,
-    })
+    }),
   );
 
   console.log(await getImageInfo("https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png"));
@@ -76,4 +77,18 @@ console.log("bucket:", client.bucket);
     accessKeySecret: process.env.ACCESS_KEY_SECRET as string,
   });
   await ecsClient.reboot(process.env.ECS_INSTANCE_ID as string);
+})();
+
+// 测试高清人体分割
+(async function testVI() {
+  const viClient = new VIClient({
+    accessKeyId: process.env.ACCESS_KEY_ID as string,
+    accessKeySecret: process.env.ACCESS_KEY_SECRET as string,
+  });
+  const result = await viClient.segmentHDBody("https://xxx.com/test.jpg");
+  const url = result.body?.data?.imageURL;
+  if (!url) {
+    throw new Error("url is required");
+  }
+  console.log(url);
 })();
