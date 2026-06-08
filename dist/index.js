@@ -14,7 +14,6 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./oss"), exports);
-__exportStar(require("./ecs"), exports);
-__exportStar(require("./vi"), exports);
+// 浏览器安全入口：纯 URL 工具，不含 Node 专用依赖
+__exportStar(require("./oss-utils"), exports);
 //# sourceMappingURL=index.js.map

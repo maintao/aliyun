@@ -1,14 +1,8 @@
 import { get } from "http";
-import {
-  ECSClient,
-  getFileExtension,
-  getImageInfo,
-  getImageInfoBatch,
-  imageUrlInfo,
-  imageUrlResize,
-  OSSClient,
-  VIClient,
-} from "./index";
+import { getImageInfo, imageUrlResize } from "./index";
+import { OSSClient } from "./oss";
+import { ECSClient } from "./ecs";
+import { VIClient } from "./vi";
 require("dotenv").config();
 
 // Usage

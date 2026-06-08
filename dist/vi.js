@@ -25,7 +25,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VIClient = void 0;
 const imageseg20191230_1 = __importStar(require("@alicloud/imageseg20191230")), $Imageseg20191230 = imageseg20191230_1;
-const openapi_core_1 = require("@alicloud/openapi-core");
 const DEFAULT_ENDPOINT = "imageseg.cn-shanghai.aliyuncs.com";
 function assertShanghaiOssUrl(imageURL) {
     let hostname;
@@ -45,11 +44,11 @@ class VIClient {
     constructor(config) {
         var _a;
         this.endpoint = (_a = config.endpoint) !== null && _a !== void 0 ? _a : DEFAULT_ENDPOINT;
-        this.client = new imageseg20191230_1.default(new openapi_core_1.$OpenApiUtil.Config({
+        this.client = new imageseg20191230_1.default({
             accessKeyId: config.accessKeyId,
             accessKeySecret: config.accessKeySecret,
             endpoint: this.endpoint,
-        }));
+        });
     }
     async segmentHDBody(imageURL) {
         assertShanghaiOssUrl(imageURL);

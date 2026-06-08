@@ -1,5 +1,5 @@
 import Imageseg20191230, * as $Imageseg20191230 from "@alicloud/imageseg20191230";
-import { $OpenApiUtil } from "@alicloud/openapi-core";
+import * as $OpenApi from "@alicloud/openapi-client";
 
 export interface VIConfig {
   accessKeyId: string;
@@ -32,13 +32,11 @@ export class VIClient {
 
   constructor(config: VIConfig) {
     this.endpoint = config.endpoint ?? DEFAULT_ENDPOINT;
-    this.client = new Imageseg20191230(
-      new $OpenApiUtil.Config({
-        accessKeyId: config.accessKeyId,
-        accessKeySecret: config.accessKeySecret,
-        endpoint: this.endpoint,
-      })
-    );
+    this.client = new Imageseg20191230({
+      accessKeyId: config.accessKeyId,
+      accessKeySecret: config.accessKeySecret,
+      endpoint: this.endpoint,
+    } as $OpenApi.Config);
   }
 
   async segmentHDBody(imageURL: string) {

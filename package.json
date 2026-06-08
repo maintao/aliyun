@@ -1,9 +1,27 @@
 {
   "name": "@fnmain/aliyun",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "aliyun utils",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./oss": {
+      "types": "./dist/oss.d.ts",
+      "default": "./dist/oss.js"
+    },
+    "./ecs": {
+      "types": "./dist/ecs.d.ts",
+      "default": "./dist/ecs.js"
+    },
+    "./vi": {
+      "types": "./dist/vi.d.ts",
+      "default": "./dist/vi.js"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "tsc && node dist/test.js",
@@ -26,7 +44,6 @@
     "@alicloud/ecs20140526": "7.0.17",
     "@alicloud/imageseg20191230": "^4.0.1",
     "@alicloud/openapi-client": "^0.4.15",
-    "@alicloud/openapi-core": "^1.0.7",
     "ali-oss": "^6.20.0",
     "axios": "^1.6.8"
   }

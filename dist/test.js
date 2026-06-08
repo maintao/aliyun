@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = require("./index");
+const oss_1 = require("./oss");
+const ecs_1 = require("./ecs");
+const vi_1 = require("./vi");
 require("dotenv").config();
 // Usage
 const config = {
@@ -9,7 +12,7 @@ const config = {
     accessKeyId: process.env.ACCESS_KEY_ID,
     accessKeySecret: process.env.ACCESS_KEY_SECRET,
 };
-const client = new index_1.OSSClient(config);
+const client = new oss_1.OSSClient(config);
 console.log("region:", client.region);
 console.log("bucket:", client.bucket);
 const downloads = [
@@ -55,7 +58,7 @@ client
 })();
 // 测试 ECS 重启
 (async function testECS() {
-    const ecsClient = new index_1.ECSClient({
+    const ecsClient = new ecs_1.ECSClient({
         endpoint: process.env.ECS_ENDPOINT,
         accessKeyId: process.env.ACCESS_KEY_ID,
         accessKeySecret: process.env.ACCESS_KEY_SECRET,
@@ -65,7 +68,7 @@ client
 // 测试高清人体分割
 (async function testVI() {
     var _a, _b;
-    const viClient = new index_1.VIClient({
+    const viClient = new vi_1.VIClient({
         accessKeyId: process.env.ACCESS_KEY_ID,
         accessKeySecret: process.env.ACCESS_KEY_SECRET,
     });
