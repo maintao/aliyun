@@ -11,6 +11,35 @@ export interface OSSConfig {
   bucket: string;
 }
 
+export interface BatchUploadFromUrlItem {
+  url: string;
+  name: string;
+}
+
+export interface BatchUploadFromUrlProgress {
+  completed: number;
+  total: number;
+}
+
+export type BatchUploadFromUrlOnSuccess = (
+  item: BatchUploadFromUrlItem,
+  result: NonNullable<Awaited<ReturnType<OSSClient["uploadFromUrl"]>>>,
+  progress: BatchUploadFromUrlProgress,
+) => void;
+
+export type BatchUploadFromUrlOnFailure = (
+  item: BatchUploadFromUrlItem,
+  error: unknown,
+  progress: BatchUploadFromUrlProgress,
+) => void;
+
+export interface BatchUploadFromUrlOptions {
+  list: BatchUploadFromUrlItem[];
+  concurrency: number;
+  onSuccess?: BatchUploadFromUrlOnSuccess;
+  onFailure?: BatchUploadFromUrlOnFailure;
+}
+
 export class OSSClient {
   private client: OSS;
   public readonly region: string;
@@ -29,6 +58,7 @@ export class OSSClient {
         method: "get",
         url: url,
         responseType: "stream",
+        timeout: 120000,
       });
     } catch (err) {
       console.error(err);
@@ -40,15 +70,34 @@ export class OSSClient {
     return result;
   }
 
-  async batchUploadFromUrl(list: { url: string; name: string }[], concurrency: number) {
+  async batchUploadFromUrl(options: BatchUploadFromUrlOptions) {
+    const { list, concurrency, onSuccess, onFailure } = options;
+    const total = list.length;
+    let completed = 0;
     const results = [];
     for (let i = 0; i < list.length; i += concurrency) {
       const concurrentJobs = list.slice(i, i + concurrency);
-      const promises = concurrentJobs.map((item) => {
-        return this.uploadFromUrl(item.url, item.name).then((result) => {
-          console.log("uploadFromUrl ", item.url);
-          return result;
-        });
+      const promises = concurrentJobs.map(async (item) => {
+        try {
+          const result = await this.uploadFromUrl(item.url, item.name);
+          completed++;
+          const progress = { completed, total };
+          if (result) {
+            console.log(`[${completed}/${total}] uploadFromUrl ok ${item.url} -> ${item.name}`);
+            onSuccess?.(item, result, progress);
+            return result;
+          }
+          const error = new Error(`Failed to download: ${item.url}`);
+          console.log(`[${completed}/${total}] uploadFromUrl failed ${item.url} -> ${item.name}`);
+          onFailure?.(item, error, progress);
+          return undefined;
+        } catch (err) {
+          completed++;
+          const progress = { completed, total };
+          console.log(`[${completed}/${total}] uploadFromUrl failed ${item.url} -> ${item.name}`);
+          onFailure?.(item, err, progress);
+          return undefined;
+        }
       });
       const result = await Promise.all(promises);
       results.push(...result);

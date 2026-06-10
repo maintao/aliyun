@@ -50,7 +50,7 @@ const downloads = [
   },
 ];
 client
-  .batchUploadFromUrl(downloads, 5)
+  .batchUploadFromUrl({ list: downloads, concurrency: 5 })
   .then((results) => {
     console.log("done");
   })

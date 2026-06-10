@@ -7,6 +7,22 @@ export interface OSSConfig {
     accessKeySecret: string;
     bucket: string;
 }
+export interface BatchUploadFromUrlItem {
+    url: string;
+    name: string;
+}
+export interface BatchUploadFromUrlProgress {
+    completed: number;
+    total: number;
+}
+export type BatchUploadFromUrlOnSuccess = (item: BatchUploadFromUrlItem, result: NonNullable<Awaited<ReturnType<OSSClient["uploadFromUrl"]>>>, progress: BatchUploadFromUrlProgress) => void;
+export type BatchUploadFromUrlOnFailure = (item: BatchUploadFromUrlItem, error: unknown, progress: BatchUploadFromUrlProgress) => void;
+export interface BatchUploadFromUrlOptions {
+    list: BatchUploadFromUrlItem[];
+    concurrency: number;
+    onSuccess?: BatchUploadFromUrlOnSuccess;
+    onFailure?: BatchUploadFromUrlOnFailure;
+}
 export declare class OSSClient {
     private client;
     readonly region: string;
@@ -16,10 +32,7 @@ export declare class OSSClient {
         name: string;
         res: OSS.NormalSuccessResponse;
     } | undefined>;
-    batchUploadFromUrl(list: {
-        url: string;
-        name: string;
-    }[], concurrency: number): Promise<({
+    batchUploadFromUrl(options: BatchUploadFromUrlOptions): Promise<({
         name: string;
         res: OSS.NormalSuccessResponse;
     } | undefined)[]>;
