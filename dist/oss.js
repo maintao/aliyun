@@ -21,6 +21,7 @@ exports.OSSClient = void 0;
 const ali_oss_1 = __importDefault(require("ali-oss"));
 const axios_1 = __importDefault(require("axios"));
 __exportStar(require("./oss-utils"), exports);
+__exportStar(require("./oss-direct-upload"), exports);
 class OSSClient {
     constructor(config) {
         this.client = new ali_oss_1.default(config);

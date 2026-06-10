@@ -2,6 +2,7 @@ import OSS from "ali-oss";
 import axios, { AxiosResponse } from "axios";
 
 export * from "./oss-utils";
+export * from "./oss-direct-upload";
 
 export interface OSSConfig {
   region: string;

@@ -1,5 +1,6 @@
 import OSS from "ali-oss";
 export * from "./oss-utils";
+export * from "./oss-direct-upload";
 export interface OSSConfig {
     region: string;
     accessKeyId: string;

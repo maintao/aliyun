@@ -14,8 +14,15 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// 浏览器安全入口：不含 Node 专用运行时依赖
-__exportStar(require("./oss-utils"), exports);
-__exportStar(require("./oss-direct-upload/types"), exports);
-__exportStar(require("./oss-direct-upload/web"), exports);
+/**
+ * OSS Web 端服务端签名直传模块。
+ *
+ * - 浏览器：`directUploadToOSS`（从 `@fnmain/aliyun` 导入）
+ * - 服务端：`OSSDirectUploadServer`、`handleOSSUploadCallback`（从 `@fnmain/aliyun/oss` 或 `@fnmain/aliyun/oss-direct-upload` 导入）
+ */
+__exportStar(require("./types"), exports);
+__exportStar(require("./callback-types"), exports);
+__exportStar(require("./server"), exports);
+__exportStar(require("./web"), exports);
+__exportStar(require("./callback"), exports);
 //# sourceMappingURL=index.js.map
