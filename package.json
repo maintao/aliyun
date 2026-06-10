@@ -1,15 +1,23 @@
 {
   "name": "@fnmain/aliyun",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "aliyun utils",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "oss": ["dist/oss.d.ts"],
-      "ecs": ["dist/ecs.d.ts"],
-      "vi": ["dist/vi.d.ts"],
-      "oss-direct-upload": ["dist/oss-direct-upload/index.d.ts"]
+      "oss": [
+        "dist/oss.d.ts"
+      ],
+      "ecs": [
+        "dist/ecs.d.ts"
+      ],
+      "vi": [
+        "dist/vi.d.ts"
+      ],
+      "oss-direct-upload": [
+        "dist/oss-direct-upload/index.d.ts"
+      ]
     }
   },
   "exports": {

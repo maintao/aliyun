@@ -44,7 +44,12 @@ export class OSSClient {
     const results = [];
     for (let i = 0; i < list.length; i += concurrency) {
       const concurrentJobs = list.slice(i, i + concurrency);
-      const promises = concurrentJobs.map((item) => this.uploadFromUrl(item.url, item.name));
+      const promises = concurrentJobs.map((item) => {
+        return this.uploadFromUrl(item.url, item.name).then((result) => {
+          console.log("uploadFromUrl ", item.url);
+          return result;
+        });
+      });
       const result = await Promise.all(promises);
       results.push(...result);
     }
