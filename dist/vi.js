@@ -48,6 +48,7 @@ class VIClient {
             accessKeyId: config.accessKeyId,
             accessKeySecret: config.accessKeySecret,
             endpoint: this.endpoint,
+            readTimeout: 10 * 1000, // 高清抠图时间可能会比较久，默认的3秒可能不够，设置10秒超时
         });
     }
     async segmentHDBody(imageURL) {

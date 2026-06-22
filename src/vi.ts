@@ -21,7 +21,7 @@ function assertShanghaiOssUrl(imageURL: string) {
     hostname === "oss-cn-shanghai.aliyuncs.com";
   if (!isShanghaiOss) {
     throw new Error(
-      `ImageURL must use Shanghai OSS standard domain (*.oss-cn-shanghai.aliyuncs.com), got: ${imageURL}`
+      `ImageURL must use Shanghai OSS standard domain (*.oss-cn-shanghai.aliyuncs.com), got: ${imageURL}`,
     );
   }
 }
@@ -36,6 +36,7 @@ export class VIClient {
       accessKeyId: config.accessKeyId,
       accessKeySecret: config.accessKeySecret,
       endpoint: this.endpoint,
+      readTimeout: 10 * 1000, // 高清抠图时间可能会比较久，默认的3秒可能不够，设置10秒超时
     } as $OpenApi.Config);
   }
 
