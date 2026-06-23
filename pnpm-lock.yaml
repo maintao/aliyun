@@ -8,15 +8,15 @@ dependencies:
   '@alicloud/ecs20140526':
     specifier: 7.0.17
     version: 7.0.17
+  '@alicloud/green20220302':
+    specifier: ^3.3.0
+    version: 3.3.0
   '@alicloud/imageseg20191230':
     specifier: ^4.0.1
     version: 4.0.1
   '@alicloud/openapi-client':
     specifier: ^0.4.15
     version: 0.4.15
-  '@alicloud/openapi-core':
-    specifier: ^1.0.7
-    version: 1.0.7
   ali-oss:
     specifier: ^6.20.0
     version: 6.20.0
@@ -139,6 +139,15 @@ packages:
     dependencies:
       '@alicloud/credentials': 2.4.4
       '@alicloud/tea-typescript': 1.8.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@alicloud/green20220302@3.3.0:
+    resolution: {integrity: sha512-TEJQo/XnLKNccB/RHFlSOxSq9vgmK/mMSkDv/gxSRhn6LbZc16OKyVWLXq334evSWybKM9GHqvdE14au+f97AA==}
+    dependencies:
+      '@alicloud/openapi-core': 1.0.7
+      '@darabonba/typescript': 1.0.3
     transitivePeerDependencies:
       - supports-color
     dev: false

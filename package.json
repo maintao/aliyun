@@ -1,6 +1,6 @@
 {
   "name": "@fnmain/aliyun",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "aliyun utils",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,6 +17,9 @@
       ],
       "oss-direct-upload": [
         "dist/oss-direct-upload/index.d.ts"
+      ],
+      "moderation": [
+        "dist/moderation.d.ts"
       ]
     }
   },
@@ -40,6 +43,10 @@
     "./oss-direct-upload": {
       "types": "./dist/oss-direct-upload/index.d.ts",
       "default": "./dist/oss-direct-upload/index.js"
+    },
+    "./moderation": {
+      "types": "./dist/moderation.d.ts",
+      "default": "./dist/moderation.js"
     }
   },
   "scripts": {
@@ -62,6 +69,7 @@
   },
   "dependencies": {
     "@alicloud/ecs20140526": "7.0.17",
+    "@alicloud/green20220302": "^3.3.0",
     "@alicloud/imageseg20191230": "^4.0.1",
     "@alicloud/openapi-client": "^0.4.15",
     "ali-oss": "^6.20.0",
