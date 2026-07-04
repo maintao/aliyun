@@ -81,6 +81,34 @@ class OSSClient {
         }
         return results;
     }
+    /**
+     * 调整图片宽度（保持宽高比），并将结果持久化保存为新的 OSS 对象
+     * @param name 源对象名称（OSS key）
+     * @param saveAs 目标对象名称
+     * @param width 目标宽度（像素）
+     * @see https://help.aliyun.com/zh/oss/developer-reference/imgresize
+     */
+    async resizeImage(name, saveAs, width) {
+        const process = `image/resize,w_${width}`;
+        const client = this.client;
+        const result = await client.processObjectSave(name, saveAs, process);
+        console.log(`resizeImage: ${name} -> ${saveAs} (w=${width})`);
+        return result;
+    }
+    /**
+     * 图片高清压缩（默认 quality 90，几乎不影响清晰度），并将结果持久化保存为新的 OSS 对象
+     * @param name 源对象名称（OSS key）
+     * @param saveAs 目标对象名称
+     * @param quality 质量 0-100，默认 90
+     * @see https://help.aliyun.com/zh/oss/developer-reference/imgquality
+     */
+    async compressImage(name, saveAs, quality = 90) {
+        const process = `image/quality,q_${quality}`;
+        const client = this.client;
+        const result = await client.processObjectSave(name, saveAs, process);
+        console.log(`compressImage: ${name} -> ${saveAs} (q=${quality})`);
+        return result;
+    }
 }
 exports.OSSClient = OSSClient;
 //# sourceMappingURL=oss.js.map

@@ -195,6 +195,32 @@ async function testIsImageRiskLevelNotBelow() {
   console.log(`risk >= high: ${notBelowHigh}`);
 }
 
+// 9. 图片调整大小（持久化，保持宽高比）
+async function testResizeImage() {
+  const sourceName = `temp/resize-test-${Date.now()}.png`;
+  await ossClient.uploadFromUrl(
+    "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    sourceName,
+  );
+
+  const saveAs = sourceName.replace(".png", "-300w.png");
+  const result = await ossClient.resizeImage(sourceName, saveAs, 300);
+  console.log("resizeImage:", result);
+}
+
+// 10. 图片高清压缩（持久化）
+async function testCompressImage() {
+  const sourceName = `temp/compress-test-${Date.now()}.png`;
+  await ossClient.uploadFromUrl(
+    "https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png",
+    sourceName,
+  );
+
+  const saveAs = sourceName.replace(".png", "-q90.png");
+  const result = await ossClient.compressImage(sourceName, saveAs, 90);
+  console.log("compressImage:", result);
+}
+
 // ─── 运行测试 ─────────────────────────────────────────────
 // 取消注释需要运行的测试用例即可
 
@@ -205,4 +231,6 @@ async function testIsImageRiskLevelNotBelow() {
 // testOSSDirectUpload().catch(console.error);
 // testImageModeration().catch(console.error);
 // testIsImageRisky().catch(console.error);
-testIsImageRiskLevelNotBelow().catch(console.error);
+// testIsImageRiskLevelNotBelow().catch(console.error);
+testResizeImage().catch(console.error);
+testCompressImage().catch(console.error);
