@@ -176,8 +176,8 @@ async function testIsImageRiskLevelNotBelow() {
 async function testResizeImage() {
     const sourceName = `temp/resize-test-${Date.now()}.png`;
     await ossClient.uploadFromUrl("https://cdn.fnmain.com/maintao/blog/2024/mowen-trans/404.png", sourceName);
-    const saveAs = sourceName.replace(".png", "-300w.png");
-    const result = await ossClient.resizeImage(sourceName, saveAs, 300);
+    const saveAs = sourceName.replace(".png", "-800w.png");
+    const result = await ossClient.resizeImage(sourceName, saveAs, 800);
     console.log("resizeImage:", result);
 }
 // 10. 图片高清压缩（持久化）

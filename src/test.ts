@@ -203,8 +203,8 @@ async function testResizeImage() {
     sourceName,
   );
 
-  const saveAs = sourceName.replace(".png", "-300w.png");
-  const result = await ossClient.resizeImage(sourceName, saveAs, 300);
+  const saveAs = sourceName.replace(".png", "-800w.png");
+  const result = await ossClient.resizeImage(sourceName, saveAs, 800);
   console.log("resizeImage:", result);
 }
 

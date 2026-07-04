@@ -43,19 +43,19 @@ export declare class OSSClient {
     } | undefined)[]>;
     /**
      * 调整图片宽度（保持宽高比），并将结果持久化保存为新的 OSS 对象
-     * @param name 源对象名称（OSS key）
-     * @param saveAs 目标对象名称
+     * @param srcObjectKey 源对象名称（OSS key）
+     * @param destObjectKey 目标对象名称
      * @param width 目标宽度（像素）
      * @see https://help.aliyun.com/zh/oss/developer-reference/imgresize
      */
-    resizeImage(name: string, saveAs: string, width: number): Promise<ProcessObjectSaveResult>;
+    resizeImage(srcObjectKey: string, destObjectKey: string, width: number): Promise<ProcessObjectSaveResult>;
     /**
      * 图片高清压缩（默认 quality 90，几乎不影响清晰度），并将结果持久化保存为新的 OSS 对象
-     * @param name 源对象名称（OSS key）
-     * @param saveAs 目标对象名称
+     * @param srcObjectKey 源对象名称（OSS key）
+     * @param destObjectKey 目标对象名称
      * @param quality 质量 0-100，默认 90
      * @see https://help.aliyun.com/zh/oss/developer-reference/imgquality
      */
-    compressImage(name: string, saveAs: string, quality?: number): Promise<ProcessObjectSaveResult>;
+    compressImage(srcObjectKey: string, destObjectKey: string, quality?: number): Promise<ProcessObjectSaveResult>;
 }
 //# sourceMappingURL=oss.d.ts.map

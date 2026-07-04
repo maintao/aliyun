@@ -126,35 +126,39 @@ export class OSSClient {
 
   /**
    * 调整图片宽度（保持宽高比），并将结果持久化保存为新的 OSS 对象
-   * @param name 源对象名称（OSS key）
-   * @param saveAs 目标对象名称
+   * @param srcObjectKey 源对象名称（OSS key）
+   * @param destObjectKey 目标对象名称
    * @param width 目标宽度（像素）
    * @see https://help.aliyun.com/zh/oss/developer-reference/imgresize
    */
-  async resizeImage(name: string, saveAs: string, width: number): Promise<ProcessObjectSaveResult> {
+  async resizeImage(
+    srcObjectKey: string,
+    destObjectKey: string,
+    width: number,
+  ): Promise<ProcessObjectSaveResult> {
     const process = `image/resize,w_${width}`;
     const client = this.client as unknown as OSSProcessClient;
-    const result = await client.processObjectSave(name, saveAs, process);
-    console.log(`resizeImage: ${name} -> ${saveAs} (w=${width})`);
+    const result = await client.processObjectSave(srcObjectKey, destObjectKey, process);
+    console.log(`resizeImage: ${srcObjectKey} -> ${destObjectKey} (w=${width})`);
     return result;
   }
 
   /**
    * 图片高清压缩（默认 quality 90，几乎不影响清晰度），并将结果持久化保存为新的 OSS 对象
-   * @param name 源对象名称（OSS key）
-   * @param saveAs 目标对象名称
+   * @param srcObjectKey 源对象名称（OSS key）
+   * @param destObjectKey 目标对象名称
    * @param quality 质量 0-100，默认 90
    * @see https://help.aliyun.com/zh/oss/developer-reference/imgquality
    */
   async compressImage(
-    name: string,
-    saveAs: string,
+    srcObjectKey: string,
+    destObjectKey: string,
     quality = 90,
   ): Promise<ProcessObjectSaveResult> {
     const process = `image/quality,q_${quality}`;
     const client = this.client as unknown as OSSProcessClient;
-    const result = await client.processObjectSave(name, saveAs, process);
-    console.log(`compressImage: ${name} -> ${saveAs} (q=${quality})`);
+    const result = await client.processObjectSave(srcObjectKey, destObjectKey, process);
+    console.log(`compressImage: ${srcObjectKey} -> ${destObjectKey} (q=${quality})`);
     return result;
   }
 }
